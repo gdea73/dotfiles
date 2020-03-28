@@ -1,0 +1,106 @@
+#
+# ~/.bashrc
+#
+
+# oCAML package manager
+. /home/gdea73/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+# If not running interactively, don't do anything
+stty -ixon
+[[ $- != *i* ]] && return
+alias lsh='ls -lh'
+alias scn='screen -dR'
+alias scr='screen -r'
+alias ls='ls --color=auto'
+alias ..="cd .."
+alias rm='rm -i'
+alias x='startx'
+alias mnvpn='cd /etc/openvpn; sudo openvpn ovpn_tcp/us787.nordvpn.com.tcp.ovpn'
+alias react-native='TERM=linux react-native'
+alias mcam='make clean && make'
+alias mcm='make clean && make'
+alias mc='make clean'
+alias mt='make test'
+alias m='make'
+
+function g {
+	grep --color=always -nIR "$@" .
+}
+
+export S='192.168.1.11'
+
+export EDITOR=vim
+# Run Vim as a command server (for VimTeX)
+# alias vim='vim --servername VIM'
+
+if ! [[ -z $short_hostname ]]; then
+	PS1='\[\e[1;9'$((RANDOM % 8))'m\]('$short_hostname')(\W)\[\e[0m\] '
+else
+	PS1='\[\e[1;32m\](\h)(\W)\[\e[0m\] '
+fi
+TZ='America/Los_Angeles'; export TZ
+PATH=$PATH:/home/gdea73/etc/scripts/:/home/gdea73/Code/Android/SDK/tools:$(yarn global bin):/home/gdea73/.cargo/bin:/home/gdea73/.gem/ruby/2.5.0/bin && export PATH
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+
+# used to ensure CALF audio does not repeatedly mkdir $HOME/audio-projects
+export LASH_NO_START_SERVER=1
+
+export ANDROID_HOME=/opt/android-sdk
+# fixes C++ lib crashes when running Android emulator
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+
+export REACT_TERMINAL=xterm-256color
+
+# configures Duplicity for backing up to Google Drive
+# jk, this has to be an absolute path export GOOGLE_DRIVE_SETTINGS=~/.duplicity/credentials
+
+CLASSPATH=/usr/share/java/junit.jar:/usr/share/java/bsh.jar:. && export CLASSPATH
+
+# aliases for Keller Hall machines
+export VJ10=gpulab10.ece.umn.edu:/home/class/alber461/vj
+export KH15=csel-kh1250-15.cselabs.umn.edu
+
+# I don't know where this came from, but it is basically a globbing 'cd'
+cdh() {
+    if [ $# = 0 ]; then
+		cd
+	else
+		case $1 in
+			.)  echo "you are already here " ;;
+			..) thisdir=$(pwd)
+				prevdir=$(dirname $thisdir)
+				cd $prevdir ;;
+			*)  counter=$(ls -l | grep "^d.*$1" | awk '{print $9}' | wc -l)
+				counter=$(expr $counter + 0)
+		case $counter in
+			1)	cd $(ls | grep "$1")
+				pwd ;;
+			0)	if test -d $1
+				then cd $1
+				else echo "no such directory"
+				fi ;;
+			*)	echo "the options are"
+				for i in *$1*
+				do test -d $i && echo "$i"
+				done ;;
+			esac ;;
+		esac
+	fi
+}
+
+# include libraries I wrote (but I haven't written anything useful)
+export LD_LIBRARY_PATH="/home/gdea73/Code/C/lib:$LD_LIBRARY_PATH:$HOME/Code/libation/lib"
+
+# Use Spacebar as a Modifier -- turns out this does not work well at all
+# xmodmap /home/gdea73/.Xmodmap
+spare_modifier="Hyper_L" 
+# xmodmap -e "keycode 65 = $spare_modifier"   
+# xmodmap -e "add Hyper_L = $spare_modifier"
+# xmodmap -e "keycode any = space"  
+# xcape -e "$spare_modifier=space"
+
+alias packer='TMPDIR=$HOME/.packertmp packer'
+
+case "$TERM" in
+	xterm*) TERM=xterm-256color
+esac
