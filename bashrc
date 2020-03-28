@@ -7,6 +7,7 @@
 
 # If not running interactively, don't do anything
 stty -ixon
+shopt -s direxpand
 [[ $- != *i* ]] && return
 alias lsh='ls -lh'
 alias scn='screen -dR'
@@ -22,6 +23,8 @@ alias mcm='make clean && make'
 alias mc='make clean'
 alias mt='make test'
 alias m='make'
+alias v='nvim'
+alias vim='nvim'
 
 function g {
 	grep --color=always -nIR "$@" .
@@ -29,9 +32,7 @@ function g {
 
 export S='192.168.1.11'
 
-export EDITOR=vim
-# Run Vim as a command server (for VimTeX)
-# alias vim='vim --servername VIM'
+export EDITOR=nvim
 
 if ! [[ -z $short_hostname ]]; then
 	PS1='\[\e[1;9'$((RANDOM % 8))'m\]('$short_hostname')(\W)\[\e[0m\] '
@@ -51,14 +52,7 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 export REACT_TERMINAL=xterm-256color
 
-# configures Duplicity for backing up to Google Drive
-# jk, this has to be an absolute path export GOOGLE_DRIVE_SETTINGS=~/.duplicity/credentials
-
 CLASSPATH=/usr/share/java/junit.jar:/usr/share/java/bsh.jar:. && export CLASSPATH
-
-# aliases for Keller Hall machines
-export VJ10=gpulab10.ece.umn.edu:/home/class/alber461/vj
-export KH15=csel-kh1250-15.cselabs.umn.edu
 
 # I don't know where this came from, but it is basically a globbing 'cd'
 cdh() {
@@ -91,13 +85,7 @@ cdh() {
 # include libraries I wrote (but I haven't written anything useful)
 export LD_LIBRARY_PATH="/home/gdea73/Code/C/lib:$LD_LIBRARY_PATH:$HOME/Code/libation/lib"
 
-# Use Spacebar as a Modifier -- turns out this does not work well at all
-# xmodmap /home/gdea73/.Xmodmap
 spare_modifier="Hyper_L" 
-# xmodmap -e "keycode 65 = $spare_modifier"   
-# xmodmap -e "add Hyper_L = $spare_modifier"
-# xmodmap -e "keycode any = space"  
-# xcape -e "$spare_modifier=space"
 
 alias packer='TMPDIR=$HOME/.packertmp packer'
 
