@@ -37,10 +37,12 @@ endif
 
 "colors"
 function! ConfigureColors()
-	highlight Normal ctermbg=None
-	highlight Visual ctermbg=60
-	highlight StatusLine cterm=bold ctermbg=60
-	highlight StatusLineNC cterm=bold ctermbg=236
+    if g:colors_name == 'evening'
+        highlight Normal ctermbg=None
+        highlight Visual ctermbg=60
+        highlight StatusLine cterm=bold ctermbg=60
+        highlight StatusLineNC cterm=bold ctermbg=236
+    endif
 endfunction
 augroup Coloring
 	autocmd!

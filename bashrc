@@ -23,19 +23,19 @@ alias mcm='make clean && make'
 alias mc='make clean'
 alias mt='make test'
 alias m='make'
-alias v='nvim'
-alias vim='nvim'
+alias v='nvim_terminal_edit.py'
+alias vim='nvim_terminal_edit.py'
 
 function g {
 	grep --color=always -nIR "$@" .
 }
 
-export S='192.168.1.11'
+export fb='192.168.1.73'
 
 export EDITOR=nvim
 
 if ! [[ -z $short_hostname ]]; then
-	PS1='\[\e[1;9'$((RANDOM % 8))'m\]('$short_hostname')(\W)\[\e[0m\] '
+	PS1='\[\e[1;9'$((RANDOM % 7 + 1))'m\]('$short_hostname')(\W)\[\e[0m\] '
 else
 	PS1='\[\e[1;32m\](\h)(\W)\[\e[0m\] '
 fi
