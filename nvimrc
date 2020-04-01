@@ -48,7 +48,6 @@ augroup Coloring
 	autocmd!
 	autocmd ColorScheme * call ConfigureColors()
 augroup END
-colorscheme evening
 
 "word highlighting"
 " Ctrl+Space makes the currently selected word the search item
