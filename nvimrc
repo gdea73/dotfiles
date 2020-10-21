@@ -72,7 +72,6 @@ set relativenumber
 
 "meta"
 autocmd BufWritePost ~/.vimrc nested source ~/.vimrc " allows nested autocommands
-command! -nargs=0 Src source ~/.vimrc
 command! -nargs=0 Erc edit ~/.vimrc
 
 "mouse"
