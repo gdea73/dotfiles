@@ -1,0 +1,69 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	color_good = "#0088CC"
+	color_bad = "#AA0000"
+	color_degraded = "#FFFFFF"
+	interval = 5
+}
+
+order += "wireless wlp3s0"
+order += "ethernet eth0"
+order += "volume master"
+order += "disk /home"
+order += "cpu_temperature 0"
+# order += "cpu_temperature 1"
+order += "load"
+order += "battery 0"
+order += "tztime local"
+
+volume master {
+	format = "🔊 %volume"
+        format_muted = "🔈 (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+disk "/home" {
+	format = "%used / %free"
+}
+
+cpu_temperature 0 {
+	format = "%degrees °C"
+	path = /sys/devices/virtual/thermal/thermal_zone0/temp
+}
+
+cpu_temperature 1 {
+	format = "%degrees °C"
+	path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+}
+
+ethernet eth0 {
+	format_up = "%ip (%speed)"
+	format_down = ""
+}
+
+load {
+	format = "%5min"
+}
+
+wireless wlp3s0 {
+	format_up = "%essid %quality %ip %bitrate"
+	format_down = ""
+	// color_good = "#AACCCC"
+}
+
+battery 0 {
+	format = "%status %percentage %remaining"
+	format_down = "AC"
+	path = "/sys/class/power_supply/BAT0/uevent"
+	low_threshold = 30
+	threshold_type = time
+	last_full_capacity = false
+}
+
+tztime local {
+	format = "%m/%d/%Y %I:%M:%S"
+	timezone = "America/Los_Angeles"
+}
