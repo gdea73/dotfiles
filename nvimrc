@@ -43,6 +43,10 @@ function! ConfigureColors()
         highlight StatusLine cterm=bold ctermbg=60
         highlight StatusLineNC cterm=bold ctermbg=236
     endif
+    if g:colors_name == 'morning'
+        highlight DiffText ctermfg=white " make numbers in DiffText legible
+        highlight Normal ctermbg=253
+    endif
 endfunction
 augroup Coloring
 	autocmd!
