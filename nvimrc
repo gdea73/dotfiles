@@ -42,6 +42,7 @@ function! ConfigureColors()
         highlight Visual ctermbg=60
         highlight StatusLine cterm=bold ctermbg=60
         highlight StatusLineNC cterm=bold ctermbg=236
+        highlight Folded ctermbg=black
     endif
     if g:colors_name == 'morning'
         highlight DiffText ctermfg=white " make numbers in DiffText legible
