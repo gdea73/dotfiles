@@ -30,6 +30,7 @@ if has('nvim')
     tnoremap KJ <C-\><C-n> 
     " paste the current search term and return to terminal mode
     tnoremap <C-g><C-g> grep "<C-\><C-n>"/pa" . -nIR
+    tnoremap <C-t> <C-\><C-n>:sp<CR><C-\><C-n>:term<CR>
     " no numbers in a terminal window
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd BufWinEnter,WinEnter term://* startinsert
