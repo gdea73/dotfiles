@@ -18,7 +18,7 @@ alias mcm='make clean && make'
 alias mc='make clean'
 alias mt='make test'
 alias m='make'
-alias v='nvim'
+alias v='nvr -o'
 alias vim='nvim'
 
 function sub_find_query {
