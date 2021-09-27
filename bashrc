@@ -53,6 +53,22 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 export REACT_TERMINAL=xterm-256color
 
+# change directory, up a number of levels
+up() {
+    if [[ $# = 0 ]]; then
+        levels=1
+    else
+        levels="$1"
+    fi
+    i=0
+    dest="$(pwd)"
+    while [[ $i -lt $levels ]]; do
+        dest="$dest/.."
+        i=$((i+1))
+    done
+    cd "$dest"
+}
+
 # I don't know where this came from, but it is basically a globbing 'cd'
 cdh() {
     if [ $# = 0 ]; then
