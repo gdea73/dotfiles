@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# short hostname prompt
+read -p "enter short hostname: " short_hostname
+
+# apt dependencies
+sudo apt-get install -y neovim screen
+
+# pip3 dependencies
+sudo pip3 install neovim-remote
+
+# dotfiles
+# 	neovim
+echo 'source $HOME/dotfiles/nvimrc' > $HOME/.vimrc
+echo 'colorscheme evening' >> $HOME/.vimrc
+mkdir -p $HOME/.config/nvim
+echo 'source $HOME/.vimrc' > $HOME/.config/nvim/init.vim
+# 	screen
+ln -s $HOME/dotfiles/screenrc .screenrc
+# 	bash
+printf 'export short_hostname="%s"\n' "$short_hostname" >> $HOME/.bashrc
+echo 'source $HOME/dotfiles/bashrc' >> $HOME/.bashrc
+source $HOME/.bashrc
+echo "done!"
