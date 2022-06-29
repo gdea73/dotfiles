@@ -10,7 +10,7 @@ alias lsh='ls -lh'
 alias scn='screen -dR'
 alias scr='screen -r'
 alias ls='ls --color=auto'
-alias ..="cd .."
+alias ..="up"
 alias rm='rm -i'
 alias x='startx'
 alias mcam='make clean && make'
@@ -38,7 +38,7 @@ export EDITOR=nvim
 export PATH="$PATH:$HOME/etc/scripts:$HOME/scripts"
 
 if ! [[ -z $short_hostname ]]; then
-	PS1='\[\e[1;9'$((RANDOM % 7 + 1))'m\]('$short_hostname')(\w)\[\e[0m\] '
+	PS1='\[\e[1;9'$((RANDOM % 2 + 1))'m\]('$short_hostname')(\w)\[\e[0m\] '
 else
 	PS1='\[\e[1;32m\](\h)(\W)\[\e[0m\] '
 fi

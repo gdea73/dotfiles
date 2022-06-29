@@ -34,7 +34,8 @@ if has('nvim')
     tnoremap <C-t> <C-\><C-n>:sp<CR><C-\><C-n>:term<CR>i
     " no numbers in a terminal window
     autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd BufWinEnter,WinEnter term://* startinsert
+    " autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufEnter term://* startinsert
 endif
 
 "colors"
@@ -48,7 +49,7 @@ function! ConfigureColors()
     endif
     if g:colors_name == 'morning'
         highlight DiffText ctermfg=white " make numbers in DiffText legible
-        highlight Normal ctermbg=253
+        highlight Normal ctermbg=None
     endif
 endfunction
 augroup Coloring
@@ -93,9 +94,9 @@ nnoremap <silent> gn :let @" = substitute(@", '\n', '', 'g')<CR>
 " copy default register to system clipboard
 nnoremap <silent> gc :let @+=@"<CR>
 
-" TODO: create & source BC-specific nvimrc for this MACHINE_ID highlighting
 "autocommands"
-autocmd BufNewFile,BufRead *.h\|*.hpp call HighlightMachineIDs()
+" tiny indents for front-end
+autocmd BufNewFile,BufRead *.ts\|*.js set ts=2 sw=2 et
 
 "syntax highlighting"
 function! HighlightMachineIDs()
@@ -106,3 +107,15 @@ endfunction
 
 "OR something into selection buffer -- note, actually activated with <C-/>
 nnoremap <C-_> /<C-r>/\\|
+
+" Open parent directory (netrw) of current buffer
+function! GetParentDirectory()
+    let path = @%
+    let dir = join(split(l:path, "/")[:-2], "/")
+    if path[0] == "/"
+        return "/" . dir
+    endif
+    return dir
+endfunction
+
+nnoremap <C-p> <Esc>:execute ':e ' . GetParentDirectory()<CR>
